@@ -4,7 +4,8 @@
   "description": "Code from the React tutorial.",
   "main": "server.js",
   "dependencies": {
-    "express": "3.12.1"
+    "body-parser": "^1.4.3",
+    "express": "^4.4.5"
   },
   "devDependencies": {},
   "scripts": {
