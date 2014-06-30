@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/petehunt/react-tutorial.git"
+    "url": "https://github.com/reactjs/react-tutorial.git"
   },
   "keywords": [
     "react",
@@ -24,7 +24,7 @@
   "author": "petehunt",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/petehunt/react-tutorial/issues"
+    "url": "https://github.com/reactjs/react-tutorial/issues"
   },
-  "homepage": "https://github.com/petehunt/react-tutorial"
+  "homepage": "https://github.com/reactjs/react-tutorial"
 }

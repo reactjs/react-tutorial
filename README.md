@@ -5,7 +5,7 @@ This is the React comment box example from [the React tutorial](http://facebook.
 ## To use
 
 ```
-npm install express
+npm install
 node server.js
 ```
 
