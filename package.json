@@ -1,0 +1,30 @@
+{
+  "name": "react-tutorial",
+  "version": "0.0.0",
+  "description": "Code from the React tutorial.",
+  "main": "server.js",
+  "dependencies": {
+    "express": "3.12.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/petehunt/react-tutorial.git"
+  },
+  "keywords": [
+    "react",
+    "tutorial",
+    "comment",
+    "example"
+  ],
+  "author": "petehunt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/petehunt/react-tutorial/issues"
+  },
+  "homepage": "https://github.com/petehunt/react-tutorial"
+}
