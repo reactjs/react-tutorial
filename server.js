@@ -1,11 +1,12 @@
 var fs = require('fs');
+var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
 var comments = JSON.parse(fs.readFileSync('_comments.json'))
 
-app.use('/', express.static(__dirname));
+app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
