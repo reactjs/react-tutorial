@@ -25,6 +25,9 @@ var CommentBox = React.createClass({
       .fail($.proxy(function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
       }, this))
+      .always($.proxy(function() {
+        setTimeout(this.loadCommentsFromServer, this.props.pollInterval);
+      }, this))
     ;
   },
   handleCommentSubmit: function(comment) {
@@ -46,7 +49,6 @@ var CommentBox = React.createClass({
   },
   componentDidMount: function() {
     this.loadCommentsFromServer();
-    setInterval(this.loadCommentsFromServer, this.props.pollInterval);
   },
   render: function() {
     return (
