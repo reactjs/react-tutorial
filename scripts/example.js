@@ -35,9 +35,6 @@ var CommentBox = React.createClass({
       // `we'll send the ajax request right after we optimistically set the new
       // `state.
       $.post(this.props.url, comment)
-        .done($.proxy(function(data) {
-          this.setState({data: data});
-        }, this))
         .fail($.proxy(function(xhr, status, err) {
           console.error(this.props.url, status, err.toString());
         }, this))
