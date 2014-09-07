@@ -18,10 +18,7 @@ var Comment = React.createClass({
 
 var CommentBox = React.createClass({
   loadCommentsFromServer: function() {
-    $.ajax({
-      url: this.props.url,
-      dataType: 'json'
-    })
+    $.getJSON(this.props.url)
       .done($.proxy(function(data) {
         this.setState({data: data});
       }, this))
@@ -37,12 +34,7 @@ var CommentBox = React.createClass({
       // `setState` accepts a callback. To avoid (improbable) race condition,
       // `we'll send the ajax request right after we optimistically set the new
       // `state.
-      $.ajax({
-        url: this.props.url,
-        dataType: 'json',
-        type: 'POST',
-        data: comment
-      })
+      $.post(this.props.url, comment)
         .done($.proxy(function(data) {
           this.setState({data: data});
         }, this))
