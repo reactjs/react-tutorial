@@ -22,12 +22,12 @@ var CommentBox = React.createClass({
       url: this.props.url,
       dataType: 'json'
     })
-      .done(function(data) {
+      .done($.proxy(function(data) {
         this.setState({data: data});
-      }.bind(this))
-      .fail(function(xhr, status, err) {
+      }, this))
+      .fail($.proxy(function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
-      }.bind(this))
+      }, this))
     ;
   },
   handleCommentSubmit: function(comment) {
@@ -43,12 +43,12 @@ var CommentBox = React.createClass({
         type: 'POST',
         data: comment
       })
-        .done(function(data) {
+        .done($.proxy(function(data) {
           this.setState({data: data});
-        }.bind(this))
-        .fail(function(xhr, status, err) {
+        }, this))
+        .fail($.proxy(function(xhr, status, err) {
           console.error(this.props.url, status, err.toString());
-        }.bind(this))
+        }, this))
       ;
     });
   },
