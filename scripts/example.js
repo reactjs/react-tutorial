@@ -20,14 +20,15 @@ var CommentBox = React.createClass({
   loadCommentsFromServer: function() {
     $.ajax({
       url: this.props.url,
-      dataType: 'json',
-      success: function(data) {
+      dataType: 'json'
+    })
+      .done(function(data) {
         this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
+      }.bind(this))
+      .fail(function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
+      }.bind(this))
+    ;
   },
   handleCommentSubmit: function(comment) {
     var comments = this.state.data;
@@ -40,14 +41,15 @@ var CommentBox = React.createClass({
         url: this.props.url,
         dataType: 'json',
         type: 'POST',
-        data: comment,
-        success: function(data) {
+        data: comment
+      })
+        .done(function(data) {
           this.setState({data: data});
-        }.bind(this),
-        error: function(xhr, status, err) {
+        }.bind(this))
+        .fail(function(xhr, status, err) {
           console.error(this.props.url, status, err.toString());
-        }.bind(this)
-      });
+        }.bind(this))
+      ;
     });
   },
   getInitialState: function() {
