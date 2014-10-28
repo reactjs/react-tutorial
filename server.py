@@ -49,7 +49,6 @@ class MyHandler(SimpleHTTPRequestHandler):
 
             # Save the data
             comments.append({u"author": form.getfirst("author"), u"text": form.getfirst("text")})
-            print comments
             # Write to file
             file = open('_comments.json', 'w+')
             file.write(json.dumps(comments))
