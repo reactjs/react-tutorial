@@ -16,7 +16,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
-var comments = JSON.parse(fs.readFileSync('_comments.json'))
+var comments = JSON.parse(fs.readFileSync('_comments.json'));
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
