@@ -29,6 +29,7 @@ app.get('/comments.json', function(req, res) {
 
 app.post('/comments.json', function(req, res) {
   comments.push(req.body);
+  fs.writeFile('_comments.json', JSON.stringify(comments))
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify(comments));
 });

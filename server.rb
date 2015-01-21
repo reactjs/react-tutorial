@@ -22,6 +22,7 @@ server.mount_proc '/comments.json' do |req, res|
   if req.request_method == 'POST'
     # Assume it's well formed
     comments << req.query
+    File.write('./_comments.json', comments.to_json)
   end
 
   # always return json
