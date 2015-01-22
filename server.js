@@ -23,14 +23,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/comments.json', function(req, res) {
+  comments = JSON.parse(fs.readFileSync('_comments.json'));
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify(comments));
-  comments = JSON.parse(fs.readFileSync('_comments.json'));
 });
 
 app.post('/comments.json', function(req, res) {
   comments.push(req.body);
-  fs.writeFile('_comments.json', JSON.stringify(comments))
+  fs.writeFile('_comments.json', JSON.stringify(comments));
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify(comments));
 });
