@@ -8,57 +8,25 @@
 # ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import os
 import json
-import cgi
-from BaseHTTPServer import HTTPServer
-from SimpleHTTPServer import SimpleHTTPRequestHandler
+from flask import Flask, Response, request
 
-PUBLIC_PATH = "public"
+app = Flask(__name__, static_url_path='', static_folder='public')
+app.add_url_rule('/', 'root', lambda: app.send_static_file('index.html'))
 
-file = open('_comments.json', 'r+')
-comments = json.loads(file.read())
-file.close()
+@app.route('/comments.json', methods=['GET', 'POST'])
+def comments_handler():
 
-def sendJSON(res):
-    res.send_response(200)
-    res.send_header('Content-type', 'application/json')
-    res.end_headers()
-    res.wfile.write(json.dumps(comments))
+    with open('_comments.json', 'r') as file:
+        comments = json.loads(file.read())
 
-class MyHandler(SimpleHTTPRequestHandler):
-    def translate_path(self, path):
-        root = os.getcwd()
-        path = PUBLIC_PATH + path
-        return os.path.join(root, path)
+    if request.method == 'POST':
+        comments.append(request.form.to_dict())
 
-    def do_GET(self):
-        if (self.path == "/comments.json"):
-            sendJSON(self)
-        else:
-            SimpleHTTPRequestHandler.do_GET(self)
+        with open('_comments.json', 'w') as file:
+            file.write(json.dumps(comments, indent=4, separators=(',', ': ')))
 
-    def do_POST(self):
-        if (self.path == "/comments.json"):
-            form = cgi.FieldStorage(
-                fp=self.rfile,
-                headers=self.headers,
-                environ={'REQUEST_METHOD':'POST',
-                         'CONTENT_TYPE':self.headers['Content-Type']}
-            )
-
-            # Save the data
-            comments.append({u"author": form.getfirst("author"), u"text": form.getfirst("text")})
-            # Write to file
-            file = open('_comments.json', 'w+')
-            file.write(json.dumps(comments))
-            file.close()
-
-            sendJSON(self)
-        else:
-            SimpleHTTPRequestHandler.do_POST(self)
+    return Response(json.dumps(comments), mimetype='application/json')
 
 if __name__ == '__main__':
-    print "Server started: http://localhost:3000/"
-    httpd = HTTPServer(('127.0.0.1', 3000), MyHandler)
-    httpd.serve_forever()
+    app.run(port=3000)
