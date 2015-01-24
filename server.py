@@ -11,8 +11,13 @@
 import os
 import json
 import cgi
-from BaseHTTPServer import HTTPServer
-from SimpleHTTPServer import SimpleHTTPRequestHandler
+try:
+    from BaseHTTPServer import HTTPServer
+    from SimpleHTTPServer import SimpleHTTPRequestHandler
+except ImportError:
+    from http.server import HTTPServer
+    from http.server import SimpleHTTPRequestHandler
+
 
 PUBLIC_PATH = "public"
 
@@ -24,7 +29,7 @@ def sendJSON(res):
     res.send_response(200)
     res.send_header('Content-type', 'application/json')
     res.end_headers()
-    res.wfile.write(json.dumps(comments))
+    res.wfile.write(json.dumps(comments).encode('utf-8'))
 
 class MyHandler(SimpleHTTPRequestHandler):
     def translate_path(self, path):
@@ -59,6 +64,6 @@ class MyHandler(SimpleHTTPRequestHandler):
             SimpleHTTPRequestHandler.do_POST(self)
 
 if __name__ == '__main__':
-    print "Server started: http://localhost:3000/"
+    print("Server started: http://localhost:3000/")
     httpd = HTTPServer(('127.0.0.1', 3000), MyHandler)
     httpd.serve_forever()
