@@ -16,17 +16,20 @@ from SimpleHTTPServer import SimpleHTTPRequestHandler
 
 PUBLIC_PATH = "public"
 
-file = open('_comments.json', 'r+')
-comments = json.loads(file.read())
-file.close()
-
-def sendJSON(res):
+def sendJSON(res, comments):
     res.send_response(200)
     res.send_header('Content-type', 'application/json')
     res.end_headers()
     res.wfile.write(json.dumps(comments))
 
 class MyHandler(SimpleHTTPRequestHandler):
+
+    def loadComments(self):
+        file = open('_comments.json', 'r+')
+        comments = json.loads(file.read())
+        file.close()
+        return comments
+
     def translate_path(self, path):
         root = os.getcwd()
         path = PUBLIC_PATH + path
@@ -34,7 +37,8 @@ class MyHandler(SimpleHTTPRequestHandler):
 
     def do_GET(self):
         if (self.path == "/comments.json"):
-            sendJSON(self)
+            comments = self.loadComments()
+            sendJSON(self, comments)
         else:
             SimpleHTTPRequestHandler.do_GET(self)
 
@@ -46,15 +50,14 @@ class MyHandler(SimpleHTTPRequestHandler):
                 environ={'REQUEST_METHOD':'POST',
                          'CONTENT_TYPE':self.headers['Content-Type']}
             )
-
+            comments = self.loadComments()
             # Save the data
             comments.append({u"author": form.getfirst("author"), u"text": form.getfirst("text")})
             # Write to file
             file = open('_comments.json', 'w+')
             file.write(json.dumps(comments))
             file.close()
-
-            sendJSON(self)
+            sendJSON(self, comments)
         else:
             SimpleHTTPRequestHandler.do_POST(self)
 

@@ -26,6 +26,7 @@ server.mount_proc '/comments.json' do |req, res|
   end
 
   # always return json
+  comments = react_version = JSON.parse(File.read('./_comments.json'))
   res['Content-Type'] = 'application/json'
   res.body = comments.to_json
 end

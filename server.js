@@ -23,6 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/comments.json', function(req, res) {
+  comments = JSON.parse(fs.readFileSync('_comments.json'));
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify(comments));
 });
