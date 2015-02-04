@@ -55,8 +55,6 @@ class MyHandler(SimpleHTTPRequestHandler):
             file.close()
 
             sendJSON(self)
-        else:
-            SimpleHTTPRequestHandler.do_POST(self)
 
 if __name__ == '__main__':
     print "Server started: http://localhost:3000/"
