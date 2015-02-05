@@ -24,4 +24,9 @@ python server.py
 ruby server.rb
 ```
 
+### PHP
+```sh
+php -S localhost:3000 -t public/ server.php
+```
+
 And visit <http://localhost:3000/>. Try opening multiple tabs!
