@@ -3,7 +3,7 @@ $scriptInvokedFromCli =
     isset($_SERVER['argv'][0]) && $_SERVER['argv'][0] === 'server.php';
 
 if($scriptInvokedFromCli) {
-    echo 'server listening on port 3000';
+    echo 'starting server on port 3000' . PHP_EOL;
     exec('php -S localhost:3000 -t public server.php');
 } else {
     return routeRequest();
@@ -20,7 +20,7 @@ function routeRequest()
             if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $commentsDecoded = json_decode($comments, true);
                 $commentsDecoded[] = ['author'  => $_POST['author'], 
-                    'text'    => $_POST['text']];
+                                      'text'    => $_POST['text']];
 
                 $comments = json_encode($commentsDecoded);
                 file_put_contents('_comments.json', $comments);
