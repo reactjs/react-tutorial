@@ -1,4 +1,8 @@
 <?php
+if(isset($_SERVER['argv'][0]) && $_SERVER['argv'][0] === 'server.php') {
+    exec('php -S localhost:3000 -t public server.php');
+}
+
 $comments = file_get_contents('_comments.json');
 switch($_SERVER["REQUEST_URI"]) {
     case '/':
