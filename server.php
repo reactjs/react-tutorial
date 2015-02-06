@@ -19,12 +19,12 @@ function routeRequest()
         case '/comments.json':
             if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $commentsDecoded = json_decode($comments, true);
-                $commentsDecoded[] = ['author'  => $_POST['author'], 
+                $commentsDecoded[] = ['author'  => $_POST['author'],
                                       'text'    => $_POST['text']];
 
                 $comments = json_encode($commentsDecoded);
                 file_put_contents('_comments.json', $comments);
-            } 
+            }
             header('Content-Type: application/json');
             echo $comments;
             break;
