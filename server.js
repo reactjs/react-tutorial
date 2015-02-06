@@ -29,11 +29,11 @@ app.get('/comments.json', function(req, res) {
 
 app.post('/comments.json', function(req, res) {
   fs.readFile('_comments.json', function(err, data) {
-    var tempComments = JSON.parse(data);
-    tempComments.push(req.body);
-    fs.writeFile('_comments.json', JSON.stringify(tempComments), function(err) {
+    var comments = JSON.parse(data);
+    comments.push(req.body);
+    fs.writeFile('_comments.json', JSON.stringify(comments), function(err) {
       res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(tempComments));
+      res.send(JSON.stringify(comments));
     });
   });
 });
