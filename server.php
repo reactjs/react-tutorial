@@ -22,7 +22,7 @@ function routeRequest()
                 $commentsDecoded[] = ['author'  => $_POST['author'],
                                       'text'    => $_POST['text']];
 
-                $comments = json_encode($commentsDecoded);
+                $comments = json_encode($commentsDecoded, JSON_PRETTY_PRINT);
                 file_put_contents('_comments.json', $comments);
             }
             header('Content-Type: application/json');
