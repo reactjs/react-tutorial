@@ -27,7 +27,7 @@ server.mount_proc '/comments.json' do |req, res|
 
   # always return json
   res['Content-Type'] = 'application/json'
-  res.body = comments.to_json
+  res.body = JSON.generate(comments)
 end
 
 trap 'INT' do server.shutdown end
