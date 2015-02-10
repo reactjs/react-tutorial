@@ -30,4 +30,9 @@ ruby server.rb
 php server.php
 ```
 
+### Go
+```sh
+go run server.go
+```
+
 And visit <http://localhost:3000/>. Try opening multiple tabs!
