@@ -17,12 +17,12 @@ root = File.expand_path './public'
 server = WEBrick::HTTPServer.new :Port => 3000, :DocumentRoot => root
 
 server.mount_proc '/comments.json' do |req, res|
-  comments = JSON.parse(File.read('./_comments.json'))
+  comments = JSON.parse(File.read('./comments.json'))
 
   if req.request_method == 'POST'
     # Assume it's well formed
     comments << req.query
-    File.write('./_comments.json', JSON.pretty_generate(comments, :indent => '    '))
+    File.write('./comments.json', JSON.pretty_generate(comments, :indent => '    '))
   end
 
   # always return json

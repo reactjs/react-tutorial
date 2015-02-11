@@ -17,7 +17,7 @@ type comment struct {
 	Text   string `json:"text"`
 }
 
-const dataFile = "./_comments.json"
+const dataFile = "./comments.json"
 
 var commentMutex = new(sync.Mutex)
 
