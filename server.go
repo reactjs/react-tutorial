@@ -64,12 +64,17 @@ func handleComments(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		// Write out the json response
-		commentsEncoder := json.NewEncoder(cFile)
-		commentsEncoder.Encode(comments)
+		// Pretty print the JSON, write to file
+		var encodedComments, _ = json.MarshalIndent(comments, "", "    ")
+		cFile.WriteAt(encodedComments, 0)
+
+		// send the encoded comments to the response
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(encodedComments)
 
 	case "GET":
 		// stream the contents of the file to the response
+		w.Header().Set("Content-Type", "application/json")
 		io.Copy(w, cFile)
 
 	default:
@@ -81,5 +86,6 @@ func handleComments(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/comments.json", handleComments)
 	http.Handle("/", http.FileServer(http.Dir("./public")))
+	log.Println("Server started: http://localhost:3000")
 	log.Fatal(http.ListenAndServe(":3000", nil))
 }
