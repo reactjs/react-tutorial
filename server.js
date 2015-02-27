@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.get('/comments.json', function(req, res) {
   fs.readFile('_comments.json', function(err, data) {
     res.setHeader('Content-Type', 'application/json');
-	res.setHeader('Cache-Control', 'no-cache');//Without this, IE won't try to request the file after update.
+    res.setHeader('Cache-Control', 'no-cache');//Without this, IE won't request the file after update. https://github.com/reactjs/react-tutorial/issues/33
     res.send(data);
   });
 });
