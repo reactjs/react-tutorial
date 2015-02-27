@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.get('/comments.json', function(req, res) {
   fs.readFile('_comments.json', function(err, data) {
     res.setHeader('Content-Type', 'application/json');
+	res.setHeader('Cache-Control', 'no-cache');//Without this, IE won't try to request the file after update.
     res.send(data);
   });
 });
