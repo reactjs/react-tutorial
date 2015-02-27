@@ -69,10 +69,12 @@ func handleComments(w http.ResponseWriter, r *http.Request) {
 		}
 
 		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Cache-Control", "no-cache")
 		io.Copy(w, bytes.NewReader(commentData))
 
 	case "GET":
 		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Cache-Control", "no-cache")
 		// stream the contents of the file to the response
 		io.Copy(w, bytes.NewReader(commentData))
 
