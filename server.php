@@ -26,6 +26,7 @@ function routeRequest()
                 file_put_contents('_comments.json', $comments);
             }
             header('Content-Type: application/json');
+            header('Cache-Control: no-cache');
             echo $comments;
             break;
         default:

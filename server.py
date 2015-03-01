@@ -26,7 +26,7 @@ def comments_handler():
         with open('_comments.json', 'w') as file:
             file.write(json.dumps(comments, indent=4, separators=(',', ': ')))
 
-    return Response(json.dumps(comments), mimetype='application/json')
+    return Response(json.dumps(comments), mimetype='application/json', headers={'Cache-Control': 'no-cache'})
 
 if __name__ == '__main__':
     app.run(port=3000)
