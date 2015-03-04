@@ -26,5 +26,9 @@
   "bugs": {
     "url": "https://github.com/reactjs/react-tutorial/issues"
   },
-  "homepage": "https://github.com/reactjs/react-tutorial"
+  "homepage": "https://github.com/reactjs/react-tutorial",
+  "dependencies" : {
+      "express": "*",
+      "body-parser": "*"
+  }
 }
