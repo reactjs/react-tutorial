@@ -11,7 +11,7 @@ if($scriptInvokedFromCli) {
 
 function routeRequest()
 {
-    $comments = file_get_contents('_comments.json');
+    $comments = file_get_contents('comments.json');
     switch($_SERVER["REQUEST_URI"]) {
         case '/':
             echo file_get_contents('./public/index.html');
@@ -23,7 +23,7 @@ function routeRequest()
                                       'text'    => $_POST['text']];
 
                 $comments = json_encode($commentsDecoded, JSON_PRETTY_PRINT);
-                file_put_contents('_comments.json', $comments);
+                file_put_contents('comments.json', $comments);
             }
             header('Content-Type: application/json');
             header('Cache-Control: no-cache');
