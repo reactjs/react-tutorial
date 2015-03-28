@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/reactjs/react-tutorial/issues"
   },
-  "homepage": "https://github.com/reactjs/react-tutorial"
+  "homepage": "https://github.com/reactjs/react-tutorial",
+  "engines" : {
+    "node" : "0.12.x"
+  }
 }
