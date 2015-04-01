@@ -91,6 +91,6 @@ func main() {
 	}
 	http.HandleFunc("/comments.json", handleComments)
 	http.Handle("/", http.FileServer(http.Dir("./public")))
-	log.Println("Server started: http://localhost:3000")
+	log.Println("Server started: http://localhost:" + port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
