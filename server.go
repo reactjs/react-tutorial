@@ -85,8 +85,12 @@ func handleComments(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
+	}
 	http.HandleFunc("/comments.json", handleComments)
 	http.Handle("/", http.FileServer(http.Dir("./public")))
-	log.Println("Server started: http://localhost:3000")
-	log.Fatal(http.ListenAndServe(":3000", nil))
+	log.Println("Server started: http://localhost:" + port)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
