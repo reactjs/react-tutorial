@@ -21,7 +21,7 @@ function routeRequest()
         case '/':
             echo file_get_contents('./public/index.html');
             break;
-        case '/comments.json':
+        case (preg_match('/comments.json*/', $_SERVER["REQUEST_URI"]) ? true : false):
             if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $commentsDecoded = json_decode($comments, true);
                 $commentsDecoded[] = ['author'  => $_POST['author'],
