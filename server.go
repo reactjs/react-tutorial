@@ -28,7 +28,7 @@ func handleComments(w http.ResponseWriter, r *http.Request) {
 	commentMutex.Lock()
 	defer commentMutex.Unlock()
 
-	// Stat the file, so we can find it's current permissions
+	// Stat the file, so we can find its current permissions
 	fi, err := os.Stat(dataFile)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Unable to stat the data file (%s): %s", dataFile, err), http.StatusInternalServerError)
