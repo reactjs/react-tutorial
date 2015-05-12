@@ -17,25 +17,23 @@ if($scriptInvokedFromCli) {
 function routeRequest()
 {
     $comments = file_get_contents('comments.json');
-    switch($_SERVER["REQUEST_URI"]) {
-        case '/':
-            echo file_get_contents('./public/index.html');
-            break;
-        case (preg_match('/comments.json*/', $_SERVER["REQUEST_URI"]) ? true : false):
-            if($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $commentsDecoded = json_decode($comments, true);
-                $commentsDecoded[] = ['author'  => $_POST['author'],
-                                      'text'    => $_POST['text']];
+    $uri = $_SERVER['REQUEST_URI'];
+    if ($uri == '/') {
+        echo file_get_contents('./public/index.html');
+    } elseif (preg_match('/\/comments.json(\?.*)?/', $uri)) {
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $commentsDecoded = json_decode($comments, true);
+            $commentsDecoded[] = ['author'  => $_POST['author'],
+                                  'text'    => $_POST['text']];
 
-                $comments = json_encode($commentsDecoded, JSON_PRETTY_PRINT);
-                file_put_contents('comments.json', $comments);
-            }
-            header('Content-Type: application/json');
-            header('Cache-Control: no-cache');
-            echo $comments;
-            break;
-        default:
-            return false;
+            $comments = json_encode($commentsDecoded, JSON_PRETTY_PRINT);
+            file_put_contents('comments.json', $comments);
+        }
+        header('Content-Type: application/json');
+        header('Cache-Control: no-cache');
+        echo $comments;
+    } else {
+        return false;
     }
 }
 
