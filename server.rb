@@ -23,7 +23,11 @@ server.mount_proc '/comments.json' do |req, res|
 
   if req.request_method == 'POST'
     # Assume it's well formed
-    comments << req.query
+    comment = {}
+    req.query.each do |key, value|
+      comment[key] = value.force_encoding('UTF-8')
+    end
+    comments << comment
     File.write('./comments.json', JSON.pretty_generate(comments, :indent => '    '))
   end
 
