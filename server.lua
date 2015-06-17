@@ -9,14 +9,14 @@
 content("application/javascript")
 setheader("Cache-Control", "no-cache")
 
--- Use a Redis list for the comments
-comments = List("comments")
+-- Use a JSON file for the comments
+comments = JFile("comments.json")
 
 -- Handle requests
 if method() == "POST" then
-  -- Add the form data to the comment list, as JSON
-  comments:add(JSON(formdata()))
+  -- Add the form data table to the JSON document
+  comments:add(ToJSON(formdata()))
 else
-  -- Combine all the JSON comments to a JSON document
-  print("["..table.concat(comments:getall(), ",").."]")
+  -- Return the contents of the JSON file
+  print(tostring(comments))
 end
