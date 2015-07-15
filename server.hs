@@ -1,4 +1,15 @@
 {-# LANGUAGE DeriveDataTypeable #-}
+-- To run this server, you'll need the HTTP server module
+-- The version used for this server:
+--* http-server
+--    Synopsis: A library for writing Haskell web servers.
+--    Default available version: 1.0.6
+--    Installed versions: 1.0.6
+--    Homepage: https://github.com/GaloisInc/http-server
+--    License:  BSD3
+-- 
+-- To install it: `cabal install http-server`
+
 import Network.HTTP.Server
 import Network.HTTP.Server.Logger
 import Network.URL as URL
@@ -6,8 +17,7 @@ import System.FilePath
 import Text.JSON.Generic
 import Data.List
 import Codec.Binary.UTF8.String
-import Control.Monad
-import Debug.Trace
+import Control.Applicative
 
 data Comment = Comment {author :: String , text :: String} deriving (Data, Typeable, Show)
 
@@ -21,23 +31,20 @@ handleRequest url request =
         body = rqBody request 
     in handleRequest' path method body
 
-requestError = return $ makeResponse BadRequest "application/json" "{\"error\" : \"I don't known what you want\"}"
 handleRequest' path GET _  
-    | path == "" = makeResponse OK "text/html" `liftM` readFile "helloworld.html"
-    | "html" `isSuffixOf` path =  makeResponse OK "text/html" `liftM` readFile path
-    | "json" `isSuffixOf` path =  makeResponse OK "application/json" `liftM` readFile path
-    | "js" `isSuffixOf` path =  makeResponse OK "text/javascript" `liftM` readFile path
-    | otherwise = requestError
-handleRequest' "comments.json" POST body = 
-    do  commentStr <- writeNewComment body 
-        return $ makeResponse OK "application/json" commentStr
+    | path == "" = makeResponse OK "text/html" <$> readFile "helloworld.html"
+    | "html" `isSuffixOf` path =  makeResponse OK "text/html" <$> readFile path
+    | "json" `isSuffixOf` path =  makeResponse OK "application/json" <$> readFile path
+    | "js" `isSuffixOf` path =  makeResponse OK "text/javascript" <$> readFile path
+    | otherwise = return $ makeResponse BadRequest "application/json" "{\"error\" : \"I don't known what you want\"}"
+handleRequest' "comments.json" POST body =  makeResponse OK "application/json" <$> writeNewComment body
 
 newComment body = let commentStr = decodeString body in 
-    trace ("The body is"++body) (decodeJSON commentStr :: Comment)
+    decodeJSON commentStr :: Comment
 
 writeNewComment body = 
     do commentStr <- readFile "comments.json"
-       newComments <- return $ trace body (encodeJSON ((decodeJSON commentStr) ++ [decodeJSON body :: Comment])) 
+       newComments <- return $ encodeJSON ((decodeJSON commentStr) ++ [decodeJSON body :: Comment])
        length newComments `seq` (writeFile "comments.json" newComments)
        return newComments
 
