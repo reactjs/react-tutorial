@@ -1,7 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 -- To run this server, you'll need the HTTP server module
 -- The version used for this server:
---* http-server
+-- * http-server
 --    Synopsis: A library for writing Haskell web servers.
 --    Default available version: 1.0.6
 --    Installed versions: 1.0.6
@@ -32,11 +32,9 @@ handleRequest url request =
     in handleRequest' path method body
 
 handleRequest' path GET _  
-    | path == "" = makeResponse OK "text/html" <$> readFile "helloworld.html"
-    | "html" `isSuffixOf` path =  makeResponse OK "text/html" <$> readFile path
-    | "json" `isSuffixOf` path =  makeResponse OK "application/json" <$> readFile path
-    | "js" `isSuffixOf` path =  makeResponse OK "text/javascript" <$> readFile path
-    | otherwise = return $ makeResponse BadRequest "application/json" "{\"error\" : \"I don't known what you want\"}"
+    | path == "" = makeResponse OK "text/html" <$> readFile "index.html"
+    | path == "comments.json"  =  makeResponse OK "application/json" <$> readFile path
+    | otherwise = return $ makeResponse NotFound "text/plain" "Unknown file"
 handleRequest' "comments.json" POST body =  makeResponse OK "application/json" <$> writeNewComment body
 
 newComment body = let commentStr = decodeString body in 
