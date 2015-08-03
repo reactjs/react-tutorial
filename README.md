@@ -22,6 +22,15 @@ pip install -r requirements.txt
 python server.py
 ```
 
+### Haskell
+
+```sh
+cabal sandbox init
+cabal install --only-dependencies
+ghc Server.hs
+./Server
+```
+
 ### Ruby
 ```sh
 ruby server.rb
