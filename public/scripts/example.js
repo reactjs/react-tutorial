@@ -43,8 +43,8 @@ var CommentBox = React.createClass({
     comments.push(comment);
     this.setState({data: comments}, function() {
       // `setState` accepts a callback. To avoid (improbable) race condition,
-      // `we'll send the ajax request right after we optimistically set the new
-      // `state.
+      // we'll send the ajax request right after we optimistically set the new
+      // state.
       $.ajax({
         url: this.props.url,
         dataType: 'json',
