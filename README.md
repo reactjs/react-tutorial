@@ -54,4 +54,12 @@ go get github.com/xyproto/algernon
 algernon server.lua
 ```
 
+### Haskell
+```
+cabal sandbox init
+cabal install http-server==1.0.6
+ghc server.hs
+./server
+```
+
 And visit <http://localhost:3000/>. Try opening multiple tabs!
