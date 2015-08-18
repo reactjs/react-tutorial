@@ -36,8 +36,8 @@
     "node": "0.12.x"
   },
   "browserify": {
-  "transform": [
-    "reactify"
-  ]
- }
+    "transform": [
+      "reactify"
+    ]
+  }
 }
