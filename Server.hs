@@ -1,3 +1,13 @@
+-- This file provided by Facebook is for non-commercial testing and evaluation
+-- purposes only. Facebook reserves all rights not expressly granted.
+--
+-- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+-- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+-- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+-- FACEBOOK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+-- ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+-- WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
+
 {-# LANGUAGE OverloadedStrings #-}
 
 module Main (main) where
@@ -32,7 +42,7 @@ instance ToJSON Comment where
 
 main :: IO ()
 main = scotty 3000 $ do
-         
+
     middleware $ staticPolicy (noDots >-> addBase "public")
     middleware logStdoutDev
 
@@ -41,7 +51,7 @@ main = scotty 3000 $ do
     get "/comments.json" $ do
       comments <- liftIO $ readFile "comments.json"
       json $ fromJust $ (decode comments :: Maybe [Comment])
-           
+
     post "/comments.json" $ do
       comments <- liftIO $ BS.readFile "comments.json"
       let jsonComments = fromJust $ (decode $ fromStrict comments :: Maybe [Comment])
@@ -50,5 +60,3 @@ main = scotty 3000 $ do
       let allComments = jsonComments ++ [Comment comment author]
       liftIO $ writeFile "comments.json" (encode allComments)
       json allComments
-
-
