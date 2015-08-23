@@ -19848,12 +19848,13 @@ var CommentBox = React.createClass({displayName: "CommentBox",
     });
   },
   handleCommentSubmit: function(comment) {
+    /*Current app has to wait for request to complete before comments appear in view.
+      In the next 3 lines we are adding this comment to the list to make the app feel
+      faster.*/
     var comments = this.state.data;
     comments.push(comment);
     this.setState({data: comments}, function() {
-      // `setState` accepts a callback. To avoid (improbable) race condition,
-      // we'll send the ajax request right after we optimistically set the new
-      // state.
+      /*The rest of this function is submitting to the server and refreshing the list.*/
       $.ajax({
         url: this.props.url,
         dataType: 'json',
@@ -19902,6 +19903,7 @@ var CommentForm = React.createClass({displayName: "CommentForm",
     if (!text || !author) {
       return;
     }
+    //The line below calls the callback from CommentForm when user submits form.
     this.props.onCommentSubmit({author: author, text: text});
     React.findDOMNode(this.refs.author).value = '';
     React.findDOMNode(this.refs.text).value = '';

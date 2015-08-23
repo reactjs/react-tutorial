@@ -11,6 +11,7 @@ var CommentForm = React.createClass({
     if (!text || !author) {
       return;
     }
+    //The line below calls the callback from CommentForm when user submits form.
     this.props.onCommentSubmit({author: author, text: text});
     React.findDOMNode(this.refs.author).value = '';
     React.findDOMNode(this.refs.text).value = '';
