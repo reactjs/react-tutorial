@@ -57,7 +57,7 @@ func handleComments(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "POST":
 		// Decode the JSON data
-		comments := make([]comment, 0)
+		var comments []comment
 		if err := json.Unmarshal(commentData, &comments); err != nil {
 			http.Error(w, fmt.Sprintf("Unable to Unmarshal comments from data file (%s): %s", dataFile, err), http.StatusInternalServerError)
 			return
