@@ -48,11 +48,11 @@ main = scotty 3000 $ do
 
     get "/" $ file "./public/index.html"
 
-    get "/comments.json" $ do
+    get "/api/comments" $ do
       comments <- liftIO $ readFile "comments.json"
       json $ fromJust $ (decode comments :: Maybe [Comment])
 
-    post "/comments.json" $ do
+    post "/api/comments" $ do
       comments <- liftIO $ BS.readFile "comments.json"
       let jsonComments = fromJust $ (decode $ fromStrict comments :: Maybe [Comment])
       author <- param "author"

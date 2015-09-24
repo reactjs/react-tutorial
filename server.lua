@@ -15,7 +15,7 @@
 -- Web page: http://algernon.roboticoverlords.org/
 --
 
-handle("/comments.json", function()
+handle("/api/comments", function()
 
   -- Set the headers
   content("application/javascript")

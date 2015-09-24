@@ -31,7 +31,7 @@ function routeRequest()
     $uri = $_SERVER['REQUEST_URI'];
     if ($uri == '/') {
         echo file_get_contents('./public/index.html');
-    } elseif (preg_match('/\/comments.json(\?.*)?/', $uri)) {
+    } elseif (preg_match('/\/api\/comments(\?.*)?/', $uri)) {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $commentsDecoded = json_decode($comments, true);
             $commentsDecoded[] = ['author'  => $_POST['author'],

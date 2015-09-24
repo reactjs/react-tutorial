@@ -15,7 +15,7 @@ from flask import Flask, Response, request
 app = Flask(__name__, static_url_path='', static_folder='public')
 app.add_url_rule('/', 'root', lambda: app.send_static_file('index.html'))
 
-@app.route('/comments.json', methods=['GET', 'POST'])
+@app.route('/api/comments', methods=['GET', 'POST'])
 def comments_handler():
 
     with open('comments.json', 'r') as file:
