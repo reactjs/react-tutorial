@@ -101,7 +101,7 @@ func main() {
 	if port == "" {
 		port = "3000"
 	}
-	http.HandleFunc("/comments.json", handleComments)
+	http.HandleFunc("/api/comments", handleComments)
 	http.Handle("/", http.FileServer(http.Dir("./public")))
 	log.Println("Server started: http://localhost:" + port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
