@@ -13,6 +13,9 @@ require 'json'
 
 port = ENV['PORT'].nil? ? 3000 : ENV['PORT'].to_i
 
+# Ensure the file IO uses UTF-8 by default
+Encoding::default_external = Encoding::default_internal = Encoding::UTF_8
+
 puts "Server started: http://localhost:#{port}/"
 
 root = File.expand_path './public'
