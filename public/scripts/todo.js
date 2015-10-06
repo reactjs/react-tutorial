@@ -1,16 +1,5 @@
 var TaskList = React.createClass({
-    deleteElement:function(){
-    },
-
     render: function(){
-
-        var displayTask  = function(task, taskIndex){
-
-            return <div>
-                {task}
-                <button onClick= {this.deleteElement}> Delete </button>
-            </div>;
-        };
 
         return <div>
             {this.props.items.map((task, taskIndex) =>
@@ -48,7 +37,6 @@ var TaskApp = React.createClass({
     addTask:function (e){
         this.setState({
             items: this.state.items.concat([this.state.task]),
-
             task: ''
         })
 
