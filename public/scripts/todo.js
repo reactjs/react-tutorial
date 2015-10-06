@@ -5,7 +5,7 @@ var TaskList = React.createClass({
             {this.props.items.map((task, taskIndex) =>
                 <div key={taskIndex}>
                     {task}
-                    <button onClick={this.props.deleteTask} value={taskIndex}> Complete </button>
+                    <button onClick={this.props.deleteTask} value={taskIndex}> Done </button>
                 </div>
             )}
         </div>;
