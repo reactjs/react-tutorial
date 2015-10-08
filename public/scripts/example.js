@@ -100,14 +100,14 @@ var CommentList = React.createClass({
 var CommentForm = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
-    var author = React.findDOMNode(this.refs.author).value.trim();
-    var text = React.findDOMNode(this.refs.text).value.trim();
+    var author = this.refs.author.value.trim();
+    var text = this.refs.text.value.trim();
     if (!text || !author) {
       return;
     }
     this.props.onCommentSubmit({author: author, text: text});
-    React.findDOMNode(this.refs.author).value = '';
-    React.findDOMNode(this.refs.text).value = '';
+    this.refs.author.value = '';
+    this.refs.text.value = '';
   },
   render: function() {
     return (
@@ -120,7 +120,7 @@ var CommentForm = React.createClass({
   }
 });
 
-React.render(
+ReactDOM.render(
   <CommentBox url="/api/comments" pollInterval={2000} />,
   document.getElementById('content')
 );
