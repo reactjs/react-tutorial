@@ -52,6 +52,16 @@ go run server.go
 go get github.com/xyproto/algernon
 # or brew install algernon
 algernon server.lua
+
+```
+
+### Erlang
+
+```sh
+rebar get-deps
+rebar compile
+rebar shell
+application:ensure_all_started(server).
 ```
 
 And visit <http://localhost:3000/>. Try opening multiple tabs!
