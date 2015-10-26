@@ -54,6 +54,13 @@ go get github.com/xyproto/algernon
 algernon server.lua
 ```
 
+### Perl
+
+```sh
+cpan Mojolicious
+perl server.pl
+```
+
 And visit <http://localhost:3000/>. Try opening multiple tabs!
 
 ## Changing the port
