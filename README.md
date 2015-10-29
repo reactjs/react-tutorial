@@ -12,6 +12,8 @@ There are several simple server implementations included. They all serve static 
 
 ```sh
 npm install
+npm install express
+npm install body-parser
 node server.js
 ```
 
