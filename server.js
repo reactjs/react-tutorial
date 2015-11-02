@@ -35,7 +35,7 @@ app.post('/api/comments', function (req, res) {
   fs.readFile(COMMENTS_FILE, function (err, data) {
     var comments = JSON.parse(data);
     comments.push(req.body);
-    fs.writeFile(COMMENTS_FILE, JSON.stringify(comments, null, 4), function (err) {
+    fs.writeFile(COMMENTS_FILE, JSON.stringify(comments, null, 2), function (err) {
       res.setHeader('Cache-Control', 'no-cache');
       res.json(comments);
     });
