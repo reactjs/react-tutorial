@@ -34,8 +34,11 @@ function routeRequest()
     } elseif (preg_match('/\/api\/comments(\?.*)?/', $uri)) {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $commentsDecoded = json_decode($comments, true);
-            $commentsDecoded[] = ['author'  => $_POST['author'],
-                                  'text'    => $_POST['text']];
+            $commentsDecoded[] = [
+                'id'      => round(microtime(true) * 1000),
+                'author'  => $_POST['author'],
+                'text'    => $_POST['text']
+            ];
 
             $comments = json_encode($commentsDecoded, JSON_PRETTY_PRINT);
             file_put_contents('comments.json', $comments);
