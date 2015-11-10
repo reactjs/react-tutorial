@@ -1,0 +1,14 @@
+{application, server,
+ [
+  {description, "React tutorial server"},
+  {vsn, "1"},
+  {registered, [server]},
+  {applications, [
+                  kernel,
+                  stdlib,
+                  crypto,
+                  cowboy,
+                  jiffy]},
+  {mod, { server_app, []}},
+  {env, []}
+ ]}.
