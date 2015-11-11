@@ -26,7 +26,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/api/comments', function(req, res) {
   fs.readFile(COMMENTS_FILE, function(err, data) {
-    if (err) console.log(err);
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
     res.setHeader('Cache-Control', 'no-cache');
     res.json(JSON.parse(data));
   });
@@ -34,11 +37,17 @@ app.get('/api/comments', function(req, res) {
 
 app.post('/api/comments', function(req, res) {
   fs.readFile(COMMENTS_FILE, function(err, data) {
-    if (err) console.log(err);
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
     var comments = JSON.parse(data);
     comments.push(req.body);
     fs.writeFile(COMMENTS_FILE, JSON.stringify(comments, null, 4), function(err) {
-      if (err) console.log(err);
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
       res.setHeader('Cache-Control', 'no-cache');
       res.json(comments);
     });
