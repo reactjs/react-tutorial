@@ -22,15 +22,6 @@ pip install -r requirements.txt
 python server.py
 ```
 
-### Haskell
-
-```sh
-cabal sandbox init
-cabal install --only-dependencies
-ghc Server.hs
-./Server
-```
-
 ### Ruby
 ```sh
 ruby server.rb
@@ -44,14 +35,6 @@ php server.php
 ### Go
 ```sh
 go run server.go
-```
-
-### Lua
-
-```sh
-go get github.com/xyproto/algernon
-# or brew install algernon
-algernon server.lua
 ```
 
 ### Perl
