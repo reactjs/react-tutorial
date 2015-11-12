@@ -22,9 +22,11 @@ import (
 	"net/http"
 	"os"
 	"sync"
+	"time"
 )
 
 type comment struct {
+	ID     int64  `json:"id"`
 	Author string `json:"author"`
 	Text   string `json:"text"`
 }
@@ -64,7 +66,7 @@ func handleComments(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// Add a new comment to the in memory slice of comments
-		comments = append(comments, comment{Author: r.FormValue("author"), Text: r.FormValue("text")})
+		comments = append(comments, comment{ID: time.Now().UnixNano() / 1000000, Author: r.FormValue("author"), Text: r.FormValue("text")})
 
 		// Marshal the comments to indented json.
 		commentData, err = json.MarshalIndent(comments, "", "    ")

@@ -8,6 +8,7 @@
 # ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+use Time::HiRes qw(gettimeofday);
 use Mojolicious::Lite;
 use Mojo::JSON qw(encode_json decode_json);
 
@@ -22,6 +23,7 @@ any [qw(GET POST)] => '/api/comments' => sub {
   if ($self->req->method eq 'POST')
   {
     push @$comments, {
+      id     => int(gettimeofday * 1000),
       author => $self->param('author'),
       text   => $self->param('text'),
     };

@@ -10,6 +10,7 @@
 
 import json
 import os
+import time
 from flask import Flask, Response, request
 
 app = Flask(__name__, static_url_path='', static_folder='public')
@@ -22,7 +23,9 @@ def comments_handler():
         comments = json.loads(file.read())
 
     if request.method == 'POST':
-        comments.append(request.form.to_dict())
+        newComment = request.form.to_dict()
+        newComment['id'] = int(time.time() * 1000)
+        comments.append(newComment)
 
         with open('comments.json', 'w') as file:
             file.write(json.dumps(comments, indent=4, separators=(',', ': ')))

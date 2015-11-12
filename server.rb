@@ -23,7 +23,7 @@ server.mount_proc '/api/comments' do |req, res|
 
   if req.request_method == 'POST'
     # Assume it's well formed
-    comment = {}
+    comment = { id: (Time.now.to_f * 1000).to_i }
     req.query.each do |key, value|
       comment[key] = value.force_encoding('UTF-8')
     end
