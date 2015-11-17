@@ -26,8 +26,12 @@ handle("/api/comments", function()
 
   -- Handle requests
   if method() == "POST" then
-    -- Add the form data table to the JSON document
-    comments:add(ToJSON(formdata(), 4))
+    -- Retrieve the form data table
+    local newComment = formdata()
+    -- Set the "id" to the current time
+    newComment.id = os.time() * 1000
+    -- Add the table to the JSON document
+    comments:add(ToJSON(newComment, 4))
   end
 
   -- Return the contents of the JSON file
