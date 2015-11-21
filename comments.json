@@ -2,11 +2,16 @@
     {
         "id": 1388534400000,
         "author": "Pete Hunt",
-        "text": "Hey there!"
+        "text": "Hey there!sfdsfdff"
     },
     {
         "id": 1420070400000,
         "author": "Paul O’Shannessy",
-        "text": "React is *great*!"
+        "text": "React is *great*!sdfdsfdsgrt"
+    },
+    {
+        "id": 1448116970855,
+        "author": "Jack",
+        "text": "这是在页面添加的评论"
     }
 ]
