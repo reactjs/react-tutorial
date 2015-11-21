@@ -2,7 +2,7 @@ var data = [
         {author: "Pertor",text: "这是Peter的留言,dsfds"},
         {author: "Jack",text: "这是Jack的留言,sdgdfsgerrfv"},
     ];
-//创建评论model
+
 var Comment = React.createClass({
       rawMarkup: function(){
         var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
@@ -22,7 +22,7 @@ var Comment = React.createClass({
           );
       }
     });
-  //创建评论列表组件
+  
  var CommentList = React.createClass({
       render: function(){
         var commentNodes = this.props.data.map(function(comment){
@@ -65,7 +65,7 @@ var CommentForm = React.createClass({
           );
       }
     });       
-  //创建box组件
+  // ceating Box module
   var CommentBox = React.createClass({
         loadCommentsFromServer: function() {
            $.ajax({
@@ -121,8 +121,8 @@ var CommentForm = React.createClass({
       
       React.render(
         /*<CommentBox data={data} />,*/
-        //这里在本地测试，url如果用教程里的api/comments会出现 NS_ERROR_DOM_BAD_URI: Access to restricted URI denied
-        //最好使用api/comments
+        //In local test，using 'api/comments' will be 'NS_ERROR_DOM_BAD_URI: Access to restricted URI denied'
+        //so i want to use 'http://localhost:3000/api/comments'
         <CommentBox url="http://localhost:3000/api/comments" pollInterval={2000} />,
         document.getElementById('content')
       );
