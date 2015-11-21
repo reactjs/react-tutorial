@@ -1,6 +1,6 @@
 var data = [
-        {author: "Pertor",text: "这是Peter的留言,dsfds"},
-        {author: "Jack",text: "这是Jack的留言,sdgdfsgerrfv"},
+        {author: "Pertor",text: "This is Peter's Message"},
+        {author: "Jack",text: "This is Jack's Message"},
     ];
 
 var Comment = React.createClass({
@@ -40,7 +40,7 @@ var Comment = React.createClass({
 
       }
     });
-//创建评论Form组件
+
 var CommentForm = React.createClass({
       handleSubmit: function(e){
         e.preventDefault();
@@ -126,7 +126,7 @@ var CommentForm = React.createClass({
         <CommentBox url="http://localhost:3000/api/comments" pollInterval={2000} />,
         document.getElementById('content')
       );
-      //使用JSX语法构建组件
+      //Use JSX
     /* var CommentBox = React.createClass({displayName: 'CommentBox', 
           render: function(){
             return (
