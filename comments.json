@@ -1,12 +1,12 @@
 [
     {
         "id": 1388534400000,
-        "author": "Pete Hunt",
-        "text": "Hey there!"
+        "address": "Korppaanmäentie 17",
+        "question": "Kuka asuu asunnossa D30?"
     },
     {
         "id": 1420070400000,
-        "author": "Paul O'shennannnigandyydz!!!!!! Jia!",
-        "text": "React is *great*!"
+        "address": "Mannerheimintie 2",
+        "question": "Mikä firma on ylimmissä kerroksissa?"
     }
 ]

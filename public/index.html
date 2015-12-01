@@ -15,54 +15,46 @@
     <div id="content"></div>
     <script type="text/babel">
 
-    var data = [
-      {id: 1, author: "Pete Hunt", text: "This is one comment"},
-      {id: 2, author: "Jordan Walke", text: "This is *another* comment"}
-    ];
 
-
-    var Comment = React.createClass({
+    var Checkpoint = React.createClass({
       render: function() {
         return (
-          <div className="comment">
-            <h2 className="commentAuthor">
-              {this.props.author}
-            </h2>
-            {this.props.children}
+          <div className="checkpoint">
+            <b>{this.props.address}</b> <i>{this.props.question}</i>
           </div>
         );
       }
     });
 
-    var CommentList = React.createClass({
+    var CheckpointList = React.createClass({
       render: function() {
-        var commentNodes = this.props.data.map(function(comment) {
+        var checkpointNodes = this.props.data.map(function(checkpoint) {
           return (
-            <Comment author={comment.author} key={comment.id}>
-              {comment.text}
-            </Comment>
+            <Checkpoint address={checkpoint.address} question={checkpoint.question} key={checkpoint.id}>
+            </Checkpoint>
           );
         });
         return (
-          <div className="commentList">
-            {commentNodes}
+          <div className="CheckpointList">
+            {checkpointNodes}
           </div>
         );
       }
     });
 
-    var CommentForm = React.createClass({
+
+    var CheckpointForm = React.createClass({
       render: function() {
         return (
-          <div className="commentForm">
-            Hello, world! I am a CommentForm.
+          <div className="checkpointForm">
+            Hello, world! I am a CheckpointForm.
           </div>
         );
       }
     });
 
 
-    var CommentBox = React.createClass({
+    var CheckpointBox = React.createClass({
       loadCommentsFromServer: function() {
         $.ajax({
           url: this.props.url,
@@ -85,22 +77,18 @@
       },
       render: function() {
         return (
-          <div className="commentBox">
-            <h1>Comments</h1>
-            <CommentList data={this.state.data} />
-            <CommentForm />
+          <div className="checkpointBox">
+            <h1>Add checkpoint</h1>
+            <CheckpointForm />
+            <h1>Checkpoints</h1>
+            <CheckpointList data={this.state.data} />
           </div>
         );
       }
     });
 
     ReactDOM.render(
-      <CommentBox url="/api/comments" pollInterval={2000} />,
-      document.getElementById('content')
-    );
-
-    ReactDOM.render(
-      <CommentBox url="/api/comments" />,
+      <CheckpointBox url="/api/comments" pollInterval={2000} />,
       document.getElementById('content')
     );
 
