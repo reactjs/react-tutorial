@@ -13,10 +13,86 @@
   </head>
   <body>
     <div id="content"></div>
-    <script type="text/babel" src="scripts/example.js"></script>
     <script type="text/babel">
-      // To get started with this tutorial running your own code, simply remove
-      // the script tag loading scripts/example.js and start writing code here.
+
+
+    var Checkpoint = React.createClass({
+      render: function() {
+        return (
+          <div className="checkpoint">
+            <b>{this.props.address}</b> <i>{this.props.question}</i>
+          </div>
+        );
+      }
+    });
+
+    var CheckpointList = React.createClass({
+      render: function() {
+        var checkpointNodes = this.props.data.map(function(checkpoint) {
+          return (
+            <Checkpoint address={checkpoint.address} question={checkpoint.question} key={checkpoint.id}>
+            </Checkpoint>
+          );
+        });
+        return (
+          <div className="CheckpointList">
+            {checkpointNodes}
+          </div>
+        );
+      }
+    });
+
+
+    var CheckpointForm = React.createClass({
+      render: function() {
+        return (
+          <div className="checkpointForm">
+            Hello, world! I am a CheckpointForm.
+          </div>
+        );
+      }
+    });
+
+
+    var CheckpointBox = React.createClass({
+      loadCommentsFromServer: function() {
+        $.ajax({
+          url: this.props.url,
+          dataType: 'json',
+          cache: false,
+          success: function(data) {
+            this.setState({data: data});
+          }.bind(this),
+          error: function(xhr, status, err) {
+            console.error(this.props.url, status, err.toString());
+          }.bind(this)
+        });
+      },
+      getInitialState: function() {
+        return {data: []};
+      },
+      componentDidMount: function() {
+        this.loadCommentsFromServer();
+        setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+      },
+      render: function() {
+        return (
+          <div className="checkpointBox">
+            <h1>Add checkpoint</h1>
+            <CheckpointForm />
+            <h1>Checkpoints</h1>
+            <CheckpointList data={this.state.data} />
+          </div>
+        );
+      }
+    });
+
+    ReactDOM.render(
+      <CheckpointBox url="/api/comments" pollInterval={2000} />,
+      document.getElementById('content')
+    );
+
+
     </script>
   </body>
 </html>
