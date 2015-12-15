@@ -4,7 +4,7 @@ body {
   font-size: 15px;
   line-height: 1.7;
   margin: 0;
-  padding: 30px;
+  padding:0;
 }
 
 a {
@@ -59,4 +59,37 @@ p, ul {
 
 ul {
   padding-left: 30px;
+}
+.questionHeader {
+  height:100px;
+  width:100%;
+  position:fixed;
+  background:#fff;
+  padding:30px;
+  box-shadow: 0 4px 2px -2px #aeaeae;
+}
+.questionBody {
+  padding-top:160px;
+  max-width:1000px;
+  margin:0 auto;
+}
+.questionLabel {
+  display:block;
+}
+.choice label {
+  display:inline-block;
+}
+label + input[type="radio"], label + input[type="checkbox"] {
+  display:inline-block;
+  vertical-align:middle;
+}
+.questionForm {
+  width: 300px;
+}
+.questionForm select, .questionForm input[type="text"] {
+  width:100%;
+  display:block;
+  margin-bottom:10px;
+  padding:5px;
+  box-sizing:border-box;
 }
