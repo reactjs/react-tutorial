@@ -80,7 +80,7 @@ var Choice = React.createClass({
     render: function () {
       return(
         <div className="choice">
-          <input type={this.props.type} value={this.props.text} id={this.props.key}/>
+          <input type={this.props.type} value={this.props.text} name={this.props.type} id={this.props.key}/>
           <label for={this.props.key}>{this.props.text}</label>
         </div>
       );
@@ -151,7 +151,6 @@ var QuestionBox = React.createClass({
 //TODO: live preview
 var QuestionPreview = React.createClass({
   getInitalState: function() {
-    console.log(this);
     return {data:[]};
   },
   render: function() {
@@ -185,6 +184,7 @@ var QuestionList = React.createClass({
     );
   }
 });
+//Todo: implement multiple choice questions
 var ChoiceInput = React.createClass({
   getInitalState: function() {
     return {choices:0}
@@ -193,7 +193,6 @@ var ChoiceInput = React.createClass({
     this.setState({choices:this.state.choices++})
   },
   render:function() {
-    console.log(this);
     var choices = [];
     if (this.props.data.type === "single_choice" || this.props.data.type === "multiple_choice"){
       for (var i = 0; i < this.state.choices; i++) {
@@ -251,6 +250,7 @@ var QuestionForm = React.createClass({
     var text = this.state.text.trim();
     this.props.onQuestionChange({type:type, label:label, text:text});
   },
+  //TODO: implement multiple choice questions
   render: function() {
     return (
       <form className="questionForm" onSubmit={this.handleSubmit}>
@@ -258,8 +258,6 @@ var QuestionForm = React.createClass({
           <option value="">Select a question type</option>
           <option value="short_answer">Short Answer</option>
           <option value="long_answer">Long Answer</option>
-          <option value="single_choice">Single Choice</option>
-          <option value="multiple_choice">Multiple Choice</option>
         </select>
         <input
           type="text"
@@ -267,7 +265,6 @@ var QuestionForm = React.createClass({
           value={this.state.label}
           onChange={this.handleLabelChange}
         />
-        <ChoiceInput data={this.state}></ChoiceInput>
         <button type="submit">Save</button>
       </form>
     );

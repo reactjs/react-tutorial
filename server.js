@@ -36,7 +36,6 @@ app.get('/api/questions', function(req, res) {
 });
 
 app.post('/api/questions', function(req, res) {
-  console.log(req.body);
   fs.readFile(QUESTIONS_FILE, function(err, data) {
     if (err) {
       console.error(err);

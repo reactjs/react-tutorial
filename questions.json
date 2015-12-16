@@ -24,19 +24,41 @@
         "choices": [
             {
                 "id": "0",
-                "text": "Ye"
+                "text": "Yes"
+            },
+            {
+                "id": "1",
+                "text": "No"
             }
         ]
     },
     {
         "id": 1450218298431,
-        "type": "single_choice",
+        "type": "multiple_choice",
         "label": "what about react?",
         "choices": [
             {
                 "id": "0",
                 "text": "Maybe"
+            },
+            {
+                "id": "1",
+                "text": "Sometimes"
+            },
+            {
+                "id": "2",
+                "text": "None of the above"
             }
         ]
+    },
+    {
+        "id": 1450237712664,
+        "type": "short_answer",
+        "label": "Where are you from?"
+    },
+    {
+        "id": 1450237724241,
+        "type": "long_answer",
+        "label": "What do you know?"
     }
 ]
