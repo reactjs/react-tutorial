@@ -4,7 +4,7 @@ body {
   font-size: 15px;
   line-height: 1.7;
   margin: 0;
-  padding:0;
+  padding:30px;
 }
 
 a {
@@ -60,18 +60,13 @@ p, ul {
 ul {
   padding-left: 30px;
 }
-.questionHeader {
-  height:100px;
-  width:100%;
-  position:fixed;
-  background:#fff;
-  padding:30px;
-  box-shadow: 0 4px 2px -2px #aeaeae;
+.questionFormColumn {
+  width:25%;
+  float:left;
 }
-.questionBody {
-  padding-top:160px;
-  max-width:1000px;
-  margin:0 auto;
+.questionListColumn {
+  width:75%;
+  float:right;
 }
 .questionLabel {
   display:block;

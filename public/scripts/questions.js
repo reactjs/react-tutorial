@@ -132,16 +132,15 @@ var QuestionBox = React.createClass({
   },
   componentDidMount: function() {
     this.loadQuestionsFromServer();
-    setInterval(this.loadQuestionsFromServer, this.props.pollInterval);
   },
   render: function() {
     return (
       <div className="questionBox">
-        <div className="questionHeader">
+        <div className="questionFormColumn">
           <QuestionForm onQuestionSubmit={this.handleQuestionSubmit} />
 
         </div>
-        <div className="questionBody">
+        <div className="questionListColumn">
           <h1>Questions</h1>
           <QuestionList data={this.state.data} />
         </div>
@@ -186,22 +185,43 @@ var QuestionList = React.createClass({
     );
   }
 });
-
+var ChoiceInput = React.createClass({
+  getInitalState: function() {
+    return {choices:0}
+  },
+  addChoiceInput: function() {
+    this.setState({choices:this.state.choices++})
+  },
+  render:function() {
+    console.log(this);
+    var choices = [];
+    if (this.props.data.type === "single_choice" || this.props.data.type === "multiple_choice"){
+      for (var i = 0; i < this.state.choices; i++) {
+        choices.push(<input
+          type="text"
+          placeholder="Question Choice Text"
+          value={this.props.data.text}
+          onChange={this.handleTextChange}
+        />)
+      }
+      choices.push(<button type="button" onClick={this.addChoiceInput}>Add Choice</button>)
+    }
+    return (
+      <div>
+        {choices}
+      </div>
+    );
+  }
+});
 var QuestionForm = React.createClass({
   getInitialState: function() {
-    return {label: '', text: '', type:'', showChoiceText:false};
-
+    return {label: '', text: '', type:''};
   },
   handleLabelChange: function(e) {
     this.setState({label: e.target.value});
   },
   handleTypeChange: function(e) {
-    this.setState({type: e.target.value});
-    if (e.target.value === "single_choice" || e.target.value === "multiple_choice") {
-      this.setState({showChoiceText: true})
-    } else {
-      this.setState({showChoiceText: false})
-    }
+    this.setState({type:e.target.value})
   },
   handleTextChange: function(e) {
     this.setState({text:e.target.value});
@@ -221,7 +241,7 @@ var QuestionForm = React.createClass({
       return;
     }
     this.props.onQuestionSubmit({type: type, label: label, choices: choices});
-    this.setState({type: '',label: '', text: ''});
+    this.setState({type: '',label: ''});
   },
   //TODO: live preview
   handlePreview: function(e) {
@@ -230,24 +250,6 @@ var QuestionForm = React.createClass({
     var label = this.state.label.trim();
     var text = this.state.text.trim();
     this.props.onQuestionChange({type:type, label:label, text:text});
-  },
-  showChoiceText: function() {
-    var choiceTextInput = <input
-      type="text"
-      placeholder="Question Choice Text"
-      value={this.state.text}
-      onChange={this.handleTextChange}
-    />;
-    return choiceTextInput;
-  },
-  //TODO: add button for multiple choice text inputs
-  showAddChoiceButton: function() {
-    var addChoiceButton = <button
-      type="button"
-      onClick={this.addChoiceInput}>
-      Add Choice
-      </button>;
-    return addChoiceButton;
   },
   render: function() {
     return (
@@ -265,9 +267,7 @@ var QuestionForm = React.createClass({
           value={this.state.label}
           onChange={this.handleLabelChange}
         />
-        <div className="choiceRow">
-          {this.state.showChoiceText ? this.showChoiceText() : null}
-        </div>
+        <ChoiceInput data={this.state}></ChoiceInput>
         <button type="submit">Save</button>
       </form>
     );
@@ -275,6 +275,6 @@ var QuestionForm = React.createClass({
 });
 
 ReactDOM.render(
-  <QuestionBox url="/api/questions" pollInterval={2000} />,
+  <QuestionBox url="/api/questions" />,
   document.getElementById('content')
 );
