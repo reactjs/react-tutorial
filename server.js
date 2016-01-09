@@ -31,7 +31,9 @@ app.get('/api/comments', function(req, res) {
       process.exit(1);
     }
     res.setHeader('Cache-Control', 'no-cache');
-    res.json(JSON.parse(data));
+    setTimeout(function () {
+      res.json(JSON.parse(data));
+    }, 200);
   });
 });
 
@@ -57,7 +59,9 @@ app.post('/api/comments', function(req, res) {
         process.exit(1);
       }
       res.setHeader('Cache-Control', 'no-cache');
-      res.json(comments);
+      setTimeout(function () {
+        res.json(comments);
+      }, 200);
     });
   });
 });
