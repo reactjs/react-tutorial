@@ -7,16 +7,22 @@
     <link rel="stylesheet" href="css/base.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.4.4/babel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
   </head>
   <body>
     <div id="content"></div>
     <script type="text/babel" src="scripts/example.js"></script>
-    <script type="text/babel">
+    <script id="code" type="text/babel">
       // To get started with this tutorial running your own code, simply remove
       // the script tag loading scripts/example.js and start writing code here.
+    </script>
+    <script type="text/javascript">
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.text = Babel.transform($('#code').text(), { presets: ['react']}).code;
+      $('body').append(script);
     </script>
   </body>
 </html>
