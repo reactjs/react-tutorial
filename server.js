@@ -15,7 +15,6 @@ var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
-var cors = require('permissive-cors');
 
 var COMMENTS_FILE = path.join(__dirname, 'comments.json');
 
@@ -24,7 +23,18 @@ app.set('port', (process.env.PORT || 3000));
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(cors());
+app.use(function(req, res, next) {
+    //set permissive CORS headers
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,HEAD,PUT,POST,DELETE,PATCH');
+    res.setHeader('Access-Control-Allow-Headers', req.headers['access-control-request-headers'] || "");
+
+    if (req.method == 'OPTIONS') //respond to preflights with 200
+        return res.end('', 200);
+
+    next();
+});
+
 
 app.get('/api/comments', function(req, res) {
   fs.readFile(COMMENTS_FILE, function(err, data) {
