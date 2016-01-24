@@ -25,7 +25,7 @@ server.mount_proc '/api/comments' do |req, res|
     # Assume it's well formed
     comment = { id: (Time.now.to_f * 1000).to_i }
     req.query.each do |key, value|
-      comment[key] = value.force_encoding('UTF-8')
+      comment[key] = value.force_encoding('UTF-8') unless key == 'id'
     end
     comments << comment
     File.write(
