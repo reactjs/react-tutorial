@@ -20,6 +20,7 @@ any [qw(GET POST)] => '/api/comments' => sub {
   my $self = shift;
   my $comments = decode_json (do { local(@ARGV,$/) = 'comments.json';<> });
   $self->res->headers->cache_control('no-cache');
+  $self->res->headers->access_control_allow_origin('*');
 
   if ($self->req->method eq 'POST')
   {
