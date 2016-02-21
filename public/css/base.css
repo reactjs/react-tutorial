@@ -88,3 +88,12 @@ label + input[type="radio"], label + input[type="checkbox"] {
   padding:5px;
   box-sizing:border-box;
 }
+.question {
+  position:relative;
+  margin-bottom:20px;
+}
+.remove {
+  position:absolute;
+  right:0;
+  top:-5px;
+}

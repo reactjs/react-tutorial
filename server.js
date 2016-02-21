@@ -1,14 +1,3 @@
-/**
- * This file provided by Facebook is for non-commercial testing and evaluation
- * purposes only. Facebook reserves all rights not expressly granted.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * FACEBOOK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
- * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
- * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
 
 var fs = require('fs');
 var path = require('path');
@@ -35,7 +24,7 @@ app.get('/api/questions', function(req, res) {
   });
 });
 
-app.post('/api/questions', function(req, res) {
+app.post('/api/questions/', function(req, res) {
   fs.readFile(QUESTIONS_FILE, function(err, data) {
     if (err) {
       console.error(err);
@@ -57,6 +46,30 @@ app.post('/api/questions', function(req, res) {
       }
       res.setHeader('Cache-Control', 'no-cache');
       res.json(questions);
+    });
+  });
+});
+
+app.delete('/api/questions/:id', function(req, res){
+  fs.readFile(QUESTIONS_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    var questions = JSON.parse(data);
+    var id = req.params.id;
+
+    var newQuestions = questions.filter(function(question){
+      return question.id !== parseInt(id);
+    });
+
+    fs.writeFile(QUESTIONS_FILE, JSON.stringify(newQuestions, null, 4), function(err) {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
+      res.setHeader('Cache-Control', 'no-cache');
+      res.json(newQuestions);
     });
   });
 });
