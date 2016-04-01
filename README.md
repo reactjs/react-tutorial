@@ -44,6 +44,12 @@ cpan Mojolicious
 perl server.pl
 ```
 
+### Haskell
+
+```sh
+cabal run
+```
+
 And visit <http://localhost:3000/>. Try opening multiple tabs!
 
 ## Changing the port
