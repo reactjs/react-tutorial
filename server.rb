@@ -11,7 +11,9 @@
 require 'webrick'
 require 'json'
 
-port = ENV['PORT'].nil? ? 3000 : ENV['PORT'].to_i
+# default port to 3000 or overwrite with PORT variable by running
+# $ PORT=3001 ruby server.rb
+port = ENV['PORT'] ? ENV['PORT'].to_i : 3000
 
 puts "Server started: http://localhost:#{port}/"
 
@@ -23,9 +25,9 @@ server.mount_proc '/api/comments' do |req, res|
 
   if req.request_method == 'POST'
     # Assume it's well formed
-    comment = {}
+    comment = { id: (Time.now.to_f * 1000).to_i }
     req.query.each do |key, value|
-      comment[key] = value.force_encoding('UTF-8')
+      comment[key] = value.force_encoding('UTF-8') unless key == 'id'
     end
     comments << comment
     File.write(
@@ -38,7 +40,8 @@ server.mount_proc '/api/comments' do |req, res|
   # always return json
   res['Content-Type']  = 'application/json'
   res['Cache-Control'] = 'no-cache'
-  res.body             = JSON.generate(comments)
+  res['Access-Control-Allow-Origin'] = '*'
+  res.body = JSON.generate(comments)
 end
 
 trap('INT') { server.shutdown }

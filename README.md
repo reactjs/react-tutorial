@@ -22,15 +22,6 @@ pip install -r requirements.txt
 python server.py
 ```
 
-### Haskell
-
-```sh
-cabal sandbox init
-cabal install --only-dependencies
-ghc Server.hs
-./Server
-```
-
 ### Ruby
 
 ```sh
@@ -49,12 +40,11 @@ php server.php
 go run server.go
 ```
 
-### Lua
+### Perl
 
 ```sh
-go get github.com/xyproto/algernon
-# or brew install algernon
-algernon server.lua
+cpan Mojolicious
+perl server.pl
 ```
 
 And visit <http://localhost:3000/>. Try opening multiple tabs!
