@@ -17,7 +17,7 @@ port = ENV['PORT'] ? ENV['PORT'].to_i : 3000
 
 puts "Server started: http://localhost:#{port}/"
 
-root = File.expand_path './public'
+root   = File.expand_path './public'
 server = WEBrick::HTTPServer.new Port: port, DocumentRoot: root
 
 server.mount_proc '/api/comments' do |req, res|
@@ -38,7 +38,7 @@ server.mount_proc '/api/comments' do |req, res|
   end
 
   # always return json
-  res['Content-Type'] = 'application/json'
+  res['Content-Type']  = 'application/json'
   res['Cache-Control'] = 'no-cache'
   res['Access-Control-Allow-Origin'] = '*'
   res.body = JSON.generate(comments)
