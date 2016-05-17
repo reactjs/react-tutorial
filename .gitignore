@@ -1,4 +1,4 @@
 *~
 node_modules
 .DS_Store
-public/scripts/bundle.js
+public/scripts/bundle.*js
