@@ -9,7 +9,7 @@ export default class CommentBox extends React.Component {
       data: []
     };
   }
-  fetchValid(response){
+  fetchValidation(response){
     if(response.ok){
       return response.json();
     } else {
@@ -21,7 +21,7 @@ export default class CommentBox extends React.Component {
       method: "GET"
     });
     fetch(req)
-      .then(this.fetchValid)
+      .then(this.fetchValidation)
       .then((comments) => {
         this.setState({data: comments})
       })
@@ -47,7 +47,7 @@ export default class CommentBox extends React.Component {
     });
 
     fetch(reqPost)
-      .then(this.fetchValid)
+      .then(this.fetchValidation)
       .then((comments) => {
         this.setState({data: comments})
       })
