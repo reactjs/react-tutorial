@@ -3,7 +3,7 @@ import Comment from "./Comment"
 
 export default class CommentList extends React.Component {
   render(){
-    var commentNodes = this.props.data.map((comment) => {
+    const commentNodes = this.props.data.map((comment) => {
       return (
         <Comment author={comment.author} key={comment.id}>
           {comment.text}
