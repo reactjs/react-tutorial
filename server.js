@@ -29,7 +29,7 @@ app.use(function(req, res, next) {
     // Set permissive CORS header - this allows this server to be used only as
     // an API server in conjunction with something like webpack-dev-server.
     res.setHeader('Access-Control-Allow-Origin', '*');
-
+    res.setHeader('Access-Control-Allow-Headers','Content-Type, Accept')
     // Disable caching so we'll always get the latest comments.
     res.setHeader('Cache-Control', 'no-cache');
     next();
@@ -46,6 +46,9 @@ app.get('/api/comments', function(req, res) {
 });
 
 app.post('/api/comments', function(req, res) {
+  console.info(req.headers);
+  console.info(req.body);
+
   fs.readFile(COMMENTS_FILE, function(err, data) {
     if (err) {
       console.error(err);
