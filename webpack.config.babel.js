@@ -5,6 +5,13 @@ export default {
     filename: 'bundle.js'
   },
   module: {
+    preLoaders: [
+      {
+        test: /\.jx|jsx$/,
+        exclude: /node_modules/,
+        loader: "eslint"
+      }
+    ],
     loaders: [
       {
         test: /\.(js|jsx)$/,
@@ -12,6 +19,9 @@ export default {
         loader: "babel"
       }
     ]
+  },
+  eslint: {
+    configFile: '.eslintrc'
   },
   resolve: {
     extensions: ['', '.js', '.jsx']

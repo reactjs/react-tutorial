@@ -1,5 +1,5 @@
-import React from "react"
-import marked from "marked"
+import React from "react";
+import marked from "marked";
 
 export default class Comment extends React.Component {
   rawMarkup() {
