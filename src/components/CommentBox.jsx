@@ -13,7 +13,7 @@ export default class CommentBox extends React.Component {
     if(response.ok){
       return response.json();
     } else {
-      console.error(response.statusText)
+      console.error(response.statusText);
     }
   }
   loadCommentsFromServer() {
@@ -23,11 +23,11 @@ export default class CommentBox extends React.Component {
     fetch(req)
       .then(this.fetchValidation)
       .then((comments) => {
-        this.setState({data: comments})
+        this.setState({data: comments});
       })
       .catch((err) => {
         console.error(err);
-      })
+      });
   }
   handleCommentSubmit(comment) {
     const comments = this.state.data;
@@ -36,24 +36,24 @@ export default class CommentBox extends React.Component {
     this.setState({data: newComments});
 
     const headers = new Headers({
-      'Content-Type': 'application/json',
-      "accept": 'application/json'
+      "Content-Type": "application/json",
+      "accept": "application/json"
     });
     const reqPost = new Request(this.props.url, {
       method: "POST",
       headers: headers,
-      mode: 'cors',
+      mode: "cors",
       body: JSON.stringify(comment)
     });
 
     fetch(reqPost)
       .then(this.fetchValidation)
       .then((comments) => {
-        this.setState({data: comments})
+        this.setState({data: comments});
       })
       .catch((err) => {
         console.error(err);
-      })
+      });
   }
   componentDidMount() {
     this.loadCommentsFromServer();
