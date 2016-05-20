@@ -7,7 +7,7 @@
 # FACEBOOK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
 # ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
+# coding: utf8
 import json
 import os
 import time
@@ -19,7 +19,7 @@ app.add_url_rule('/', 'root', lambda: app.send_static_file('index.html'))
 
 @app.route('/api/comments', methods=['GET', 'POST'])
 def comments_handler():
-    with open('comments.json', 'r') as f:
+    with open('comments.json', 'r',encoding='utf-8') as f:
         comments = json.loads(f.read())
 
     if request.method == 'POST':
@@ -27,7 +27,7 @@ def comments_handler():
         new_comment['id'] = int(time.time() * 1000)
         comments.append(new_comment)
 
-        with open('comments.json', 'w') as f:
+        with open('comments.json', 'w',encoding="utf-8") as f:
             f.write(json.dumps(comments, indent=4, separators=(',', ': ')))
 
     return Response(
