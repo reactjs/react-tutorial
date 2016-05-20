@@ -6,7 +6,32 @@
     },
     {
         "id": 1420070400000,
-        "author": "Paul O’Shannessy",
+        "author": "Paul O\u2019Shannessy",
         "text": "React is *great*!"
+    },
+    {
+        "id": 1463735568960,
+        "author": "Cyril",
+        "text": "J'\u00e9crit un commentaire :D"
+    },
+    {
+        "id": 1463736107579,
+        "author": "test",
+        "text": "j'\u00e9crie"
+    },
+    {
+        "id": 1463736148619,
+        "author": "dfe",
+        "text": "fefef"
+    },
+    {
+        "id": 1463736154352,
+        "author": "grgr",
+        "text": "grgrrg"
+    },
+    {
+        "id": 1463737267954,
+        "author": "dfjki",
+        "text": "lzdmll"
     }
 ]
