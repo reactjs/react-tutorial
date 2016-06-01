@@ -1,1 +1,2 @@
 Flask==0.10.1
+livereload==2.4.1
