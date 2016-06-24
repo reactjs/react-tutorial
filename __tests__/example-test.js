@@ -9,20 +9,26 @@ var CommentBox = m.CommentBox;
 
 describe('TestCommentBoxComponent', () => {
   var boxNode;
+  var commentBox;
   beforeEach(() => {
-    const commentBox = ReactTestUtils.renderIntoDocument(
+    commentBox = ReactTestUtils.renderIntoDocument(
       <CommentBox url="/api/comments" pollInterval={2000} />
     );
-
     boxNode = ReactDOM.findDOMNode(commentBox);
+  });
+
+  it('should exists', function() {
+    expect(ReactTestUtils.isCompositeComponent(commentBox)).toBeTruthy();
   });
 
   it('class should equal commentBox', () => {
     expect(boxNode.className).toEqual('commentBox');
   });
 
-  it('header should be Comments', () => {
-    //expect(boxNode.children.h1).toBeDefined();
-    //console.log(boxNode.children)
-  });
+  it('initial state data should be empty', () => {
+    expect(commentBox.getInitialState()).toBeDefined();
+    const commentBoxData = commentBox.getInitialState().data;
+    expect(commentBoxData).toBeDefined();
+    expect(commentBoxData).toEqual([]);
+  })
 })
