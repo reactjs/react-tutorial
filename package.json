@@ -6,13 +6,38 @@
   "description": "Code from the React tutorial.",
   "main": "server.js",
   "dependencies": {
+    "babel-jest": "^13.0.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
     "body-parser": "^1.4.3",
-    "express": "^4.4.5"
+    "express": "^4.4.5",
+    "jest-cli": "^13.0.0",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.3.0",
+    "jest-cli": "^13.0.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node server.js"
+  },
+  "jest": {
+    "scriptPreprocessor": "./node_modules/babel-jest",
+    "testFileExtensions": [
+      "es6",
+      "js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "es6"
+    ],
+    "unmockedModulePathPatterns": [
+      "./node_modules/react"
+    ]
   },
   "repository": {
     "type": "git",
@@ -29,7 +54,7 @@
     "url": "https://github.com/reactjs/react-tutorial/issues"
   },
   "homepage": "https://github.com/reactjs/react-tutorial",
-  "engines" : {
-    "node" : "0.12.x"
+  "engines": {
+    "node": "0.12.x"
   }
 }

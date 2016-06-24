@@ -9,6 +9,8 @@
  * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+var React = require('react');
+var $ = require('jQuery');
 
 var Comment = React.createClass({
   rawMarkup: function() {
@@ -141,7 +143,7 @@ var CommentForm = React.createClass({
   }
 });
 
-ReactDOM.render(
-  <CommentBox url="/api/comments" pollInterval={2000} />,
-  document.getElementById('content')
-);
+module.exports = {
+  CommentBox: CommentBox
+}
+
