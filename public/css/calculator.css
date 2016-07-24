@@ -1,0 +1,57 @@
+
+#calculatorContainer {
+    width: 480px;
+    height: 800px;
+
+    margin: 100px auto 0 auto;
+
+    background-color: darkgray;
+}
+
+.calcButton,
+.calcOpsButton {
+    width: 80px;
+    height: 80px;
+
+    background-color: white;
+
+    float: left;
+}
+
+.buttonGap {
+  width: 40px;
+  height: 80px;
+  float: left;
+}
+
+.calcButton .calcLabel,
+.calcOpsButton .calcLabel {
+  margin: 25px auto;
+
+  width: 30px;
+  height: 30px;
+
+  text-align: center;
+}
+
+.calcRow {
+  width: 100%;
+  height: 80px;
+
+  background-color: #4183c4;
+}
+
+.calcScreen {
+  width: 100%;
+  height: 80px;
+
+  background-color: #4183c4;
+}
+
+.calculator {
+  width: 100%;
+
+  height: 320px;
+
+  background-color: darkgray;
+}
