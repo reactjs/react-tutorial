@@ -54,7 +54,7 @@ var CalcScreen = React.createClass({
   render: function() {
     return (
       <div className="calcScreen" >
-        <h2 className="calcScreen" >
+        <h2 className="calcScreenDisplay" >
           {this.state.screenStr}
         </h2>
       </div>
@@ -102,7 +102,8 @@ var Calculator = React.createClass({
       if (clickData.clickType == "number") {
 
         console.log("clickData:", clickData);
-        if (this.state.screenStr == "0") {
+
+        if (this.state.screenStr == "0" || this.state.pendingOperation != '') {
           this.state.screenStr = String(clickData.value);
         } else {
           this.state.screenStr = this.state.screenStr + String(clickData.value);
@@ -127,10 +128,12 @@ var Calculator = React.createClass({
           this.runOperation();
 
         } else {
-          console.log(" >> UDPATING STATE for operation: " + clickData.operation);
+          console.log(" >> UPDATING STATE for operation: " + clickData.operation);
           this.state.lastInput = this.state.screenVal;
-          this.state.screenVal = 0;
-          this.state.screenStr = "0";
+
+          // WAIT til a num is given like most calculators?
+          //this.state.screenVal = 0;
+          //this.state.screenStr = "0";
           this.state.pendingOperation = clickData.operation;
           this.updateScreen();
         }
