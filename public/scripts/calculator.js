@@ -7,7 +7,7 @@
 var CalcNumButton = React.createClass({
   handleClick: function(e) {
     e.preventDefault();
-    console.log("CalcNumButton CLICK!");
+
     this.props.onClickButton({clickType: "number", value: this.props.numValue});
   },
   render: function() {
@@ -25,7 +25,6 @@ var CalcNumButton = React.createClass({
 var CalcOpsButton = React.createClass({
   handleClick: function(e) {
     e.preventDefault();
-    console.log("CalcOpsButton CLICK!");
     this.props.onClickButton({clickType: "operation", operation: this.props.operation});
   },
   render: function() {
@@ -49,7 +48,6 @@ var CalcScreen = React.createClass({
     newState["screenStr"] = value;
 
     this.setState(newState);
-    console.log("IN handleScreenUpdate 756", this.state);
   },
   render: function() {
     return (
@@ -88,7 +86,6 @@ var Calculator = React.createClass({
         newValue = this.state.lastInput / this.state.screenVal;
         break;
     }
-    console.log(" newValue:" + newValue);
     this.state.screenVal = newValue;
     this.state.screenStr = String(newValue);
     this.updateScreen();
@@ -96,12 +93,8 @@ var Calculator = React.createClass({
   },
   handleClickButton: function(clickData) {
 
-    console.log("#$# handleClickButton:", clickData);
-
     if (typeof(clickData.clickType) !== 'undefined') {
       if (clickData.clickType == "number") {
-
-        console.log("clickData:", clickData);
 
         if (this.state.screenStr == "0" || this.state.pendingOperation != '') {
           this.state.screenStr = String(clickData.value);
@@ -111,7 +104,6 @@ var Calculator = React.createClass({
         this.state.screenVal = parseInt(this.state.screenStr);
         this.updateScreen();
       } else if (clickData.clickType == "operation") {
-
 
         if (clickData.operation == "C") {
           this.state.lastInput = 0;  // UNDEFINED?
@@ -128,7 +120,6 @@ var Calculator = React.createClass({
           this.runOperation();
 
         } else {
-          console.log(" >> UPDATING STATE for operation: " + clickData.operation);
           this.state.lastInput = this.state.screenVal;
 
           // WAIT til a num is given like most calculators?
