@@ -27,11 +27,11 @@ if($scriptInvokedFromCli) {
 
 function routeRequest()
 {
-    $comments = file_get_contents('comments.json');
     $uri = $_SERVER['REQUEST_URI'];
     if ($uri == '/') {
         echo file_get_contents('./public/index.html');
     } elseif (preg_match('/\/api\/comments(\?.*)?/', $uri)) {
+        $comments = file_get_contents('comments.json');
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $commentsDecoded = json_decode($comments, true);
             $commentsDecoded[] = [
