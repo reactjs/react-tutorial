@@ -58,7 +58,7 @@ app.post('/api/comments', function(req, res) {
     var newComment = {
       id: Date.now(),
       author: req.body.author,
-      text: req.body.text,
+      text: req.body.text
     };
     comments.push(newComment);
     fs.writeFile(COMMENTS_FILE, JSON.stringify(comments, null, 4), function(err) {
