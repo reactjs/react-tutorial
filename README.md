@@ -44,6 +44,11 @@ cpan Mojolicious
 perl server.pl
 ```
 
+### Groovy
+```sh
+groovy server.groovy
+```
+
 And visit <http://localhost:3000/>. Try opening multiple tabs!
 
 ## Changing the port
