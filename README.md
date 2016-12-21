@@ -37,6 +37,14 @@ php server.php
 go run server.go
 ```
 
+### Lua
+
+```sh
+go get github.com/xyproto/algernon
+# or brew install algernon
+algernon server.lua
+```
+
 ### Perl
 
 ```sh
