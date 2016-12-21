@@ -44,6 +44,12 @@ cpan Mojolicious
 perl server.pl
 ```
 
+### Elixir
+```elixir
+mix deps.get
+mix run --no-halt
+```
+
 And visit <http://localhost:3000/>. Try opening multiple tabs!
 
 ## Changing the port
