@@ -10,23 +10,19 @@
         "text": "React is *great*!"
     },
     {
-        "id": 1466760920344,
-        "author": "Leticia",
-        "text": "Test"
+        "id": 1464988635157,
+        "author": "ben",
+        "text": "*abc*"
     },
     {
-        "id": 1466762939294,
-        "author": "SDKJSLKGJ",
-        "text": "sjfklgjs"
+        "id": 1464988636500,
+        "author": "ben",
+        "text": "*abc*"
     },
     {
-        "id": 1466778761498,
-        "author": "dfgdg",
-        "text": "dafg"
-    },
-    {
-        "id": 1466778933070,
-        "author": "dghl",
-        "text": ";lkrg"
+        "id": 1464988717637,
+        "author": "evil",
+        "text": "<a href=\"javascript:alert(1)\">alert(1)</a>"
+>>>>>>> upstream/master
     }
 ]
