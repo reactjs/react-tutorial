@@ -1,4 +1,4 @@
-jest.unmock('../public/scripts/bundle.js');
+jest.unmock('../public/scripts/example.js');
 
 var React = require('react');
 var ReactDOM = require('react-dom');
@@ -21,12 +21,11 @@ describe('TestCommentBoxComponent', () => {
     expect(ReactTestUtils.isCompositeComponent(commentBox)).toBeTruthy();
   });
 
-  /*it('class should equal commentBox', () => {
+  it('class should equal commentBox', () => {
     expect(boxNode.className).toEqual('commentBox');
-  });*/
+  });
 
   it('initial state data should be empty', () => {
-    console.log('!!!!!!',commentBox)
     expect(commentBox.getInitialState()).toBeDefined();
     const commentBoxData = commentBox.getInitialState().data;
     expect(commentBoxData).toBeDefined();

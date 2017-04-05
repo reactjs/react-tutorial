@@ -10,6 +10,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 var React = require('react');
+var $ = require('jquery');
 
 var Comment = React.createClass({
   rawMarkup: function() {
@@ -145,4 +146,3 @@ var CommentForm = React.createClass({
 module.exports = {
   CommentBox: CommentBox
 }
-
