@@ -10,7 +10,6 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 var React = require('react');
-var $ = require('jQuery');
 
 var Comment = React.createClass({
   rawMarkup: function() {
