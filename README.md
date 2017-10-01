@@ -2,7 +2,7 @@
 
 # React Tutorial
 
-This is the React comment box example from [the React tutorial](http://facebook.github.io/react/docs/tutorial.html).
+This is the React comment box example from [the React Tutorial (v15.3.2)](https://github.com/facebook/react/blob/v15.3.2/docs/docs/tutorial.md).
 
 ## To use
 
