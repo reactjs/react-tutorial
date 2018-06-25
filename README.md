@@ -44,6 +44,13 @@ cpan Mojolicious
 perl server.pl
 ```
 
+### Rakudo aka Perl6
+
+```sh
+zef install cro JSON::Fast
+perl6 server.p6
+```
+
 And visit <http://localhost:3000/>. Try opening multiple tabs!
 
 ## Changing the port
